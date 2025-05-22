@@ -9,6 +9,20 @@ def get_user_info():
     }
     creds = str(login)
     return creds
-creds = get_user_info()
+
+
 with open("logins.txt", "w") as file:
     file.write(creds)
+
+
+while True:
+    creds = get_user_info()
+    with open("logins.txt", "a") as file:
+        file.write(creds + "\n")
+    add_login = input("Do you want to add another login (yes/no)? :")
+    if add_login.lower() != "yes":
+        break
+
+    def main():
+        while True:
+            print()
