@@ -1,7 +1,7 @@
 import string
 import secrets
 
-def get_user_info():
+def get_user_info(): # this works good
     site_name = input("\nWhat is the URL you want to save a login for? :")
     user_name = input("\nUsername? :")
     choose_password = input("\nType 'generate' to have a password created for you, otherwise just enter your password. :")
@@ -24,16 +24,24 @@ def create_login():
         file.write(creds + "\n")
     print("Login saved!")
 
-def search_login():
-    criteria = input("Enter a site or keyword. :")
-    found = False
-    with open("logins.txt", "r") as file:
-        for line in file:
-            if criteria in line:
-                print(line.strip())
-                found = True
-    if not found:
-        print("No results found.")
+def get_criteria():
+    criteria = input("Enter a site or keyword to search for: ")
+    return criteria
+
+def display_search_results(): # output the logins based on criteria from logins.txt
+    criteria = get_criteria()
+    matches = search_login(criteria)
+    if matches:
+        for i, (idx, entry) in enumerate(matches, 1): # not sure I get this line go back over this but lets get it working.
+            print(f"{i}. {entry}")
+        else:
+            print("No results found.")
+        return matches # this is returned to be used in modify and delete
+
+def search_login(): # refactoring this to use display_search_criteria()
+    display_search_results():
+
+def modify_login(): # build this out using display_search_criteria()
 
 def generate_password():
     characters = (string.ascii_letters + string.digits + string.punctuation)
@@ -42,27 +50,37 @@ def generate_password():
     for i in range(pw_len):
         gen_pass += secrets.choice(characters)
     return gen_pass
+
+def delete_login(): # build this out using display_search_criteria()
         
 def main():
     while True:
         print("\nWhat would you like to do?")
         print("1. Search for a login")
         print("2. Create a new login")
-        print("3. Generate a password")
-        print("4. Exit password manager")
-        choice = input("Enter your choice [1-4]: ")
+        print("3. Modify an existing login")
+        print("4. Delete a login")
+        print("5. Generate a password")
+        print("6. Exit password manager")
+        choice = input("Enter your choice [1-6]: ")
 
         if choice == "1":
             print("You chose to search for a login.")
-            search_login()
+            display_search_results()
         elif choice == "2":
             print("You chose to create a new login.")
             create_login()
         elif choice == "3":
+            print("You chose to modify an existing login.")
+            modify_login()
+        elif choice == "4":
+            print("You chose to delete a login.")
+            delete_login()
+        elif choice == "5":
             print("You chose to generate a password.")
             password = generate_password()
             print(f"Your generated password is: {password}")
-        elif choice == "4":
+        elif choice == "5":
             print("Goodbye!")
             break
         else:
