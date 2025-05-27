@@ -24,22 +24,27 @@ def create_login():
         file.write(creds + "\n")
     print("Login saved!")
 
-def get_criteria():
+def get_criteria(): # gets input and returns for use in search
     criteria = input("Enter a site or keyword to search for: ")
     return criteria
 
+def search_login(criteria, filename="logins.txt"): # refactor done, searches, enumerates, appends, returns matches
+    matches = []
+    with open(filename, "r") as file:
+        for idx, line in enumerate(file):
+            if criteria in line:
+                matches.append((idx, line.strip()))
+    return matches
+    
 def display_search_results(): # output the logins based on criteria from logins.txt
     criteria = get_criteria()
     matches = search_login(criteria)
     if matches:
-        for i, (idx, entry) in enumerate(matches, 1): # not sure I get this line go back over this but lets get it working.
+        for i, (idx, entry) in enumerate(matches, 1): # think I get it now, loops matches list,numbering and displaying each stirng
             print(f"{i}. {entry}")
-        else:
-            print("No results found.")
-        return matches # this is returned to be used in modify and delete
-
-def search_login(): # refactoring this to use display_search_criteria()
-    display_search_results():
+    else:
+        print("No results found.")
+    return matches # this is returned to be used in modify and delete
 
 def modify_login(): # build this out using display_search_criteria()
 
