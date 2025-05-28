@@ -32,7 +32,7 @@ def search_login(criteria, filename="logins.txt"): # refactor done, searches, en
     matches = []
     with open(filename, "r") as file:
         for idx, line in enumerate(file):
-            if criteria in line:
+            if criteria.lower() in line.lower(): 
                 matches.append((idx, line.strip()))
     return matches
     
@@ -46,7 +46,7 @@ def display_search_results(): # output the logins based on criteria from logins.
         print("No results found.")
     return matches # this is returned to be used in modify and delete
 
-def modify_login(): # build this out using display_search_criteria()
+# def modify_login(): # build this out using display_search_criteria()
 
 def generate_password():
     characters = (string.ascii_letters + string.digits + string.punctuation)
@@ -56,7 +56,7 @@ def generate_password():
         gen_pass += secrets.choice(characters)
     return gen_pass
 
-def delete_login(): # build this out using display_search_criteria()
+# def delete_login(): # build this out using display_search_criteria()
         
 def main():
     while True:
@@ -85,7 +85,7 @@ def main():
             print("You chose to generate a password.")
             password = generate_password()
             print(f"Your generated password is: {password}")
-        elif choice == "5":
+        elif choice == "6":
             print("Goodbye!")
             break
         else:
