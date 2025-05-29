@@ -46,6 +46,14 @@ def display_search_results(): # output the logins based on criteria from logins.
         print("No results found.")
     return matches # this is returned to be used in modify and delete
 
+def select_login(matches): # just brainstorming this is not good
+    selection = input(int("Choose a login to to View/Modify/Delete.(Input a number from list)"))
+    if selection.isdigit() != matches:
+        print("Invalid selection! Please select a login from the list.")
+    else:
+        print(selection)
+
+
 # def modify_login(): # build this out using display_search_criteria()
 
 def generate_password():
