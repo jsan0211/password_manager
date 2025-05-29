@@ -46,15 +46,45 @@ def display_search_results(): # output the logins based on criteria from logins.
         print("No results found.")
     return matches # this is returned to be used in modify and delete
 
-def select_login(matches): # just brainstorming this is not good
-    selection = input(int("Choose a login to to View/Modify/Delete.(Input a number from list)"))
-    if selection.isdigit() != matches:
-        print("Invalid selection! Please select a login from the list.")
-    else:
-        print(selection)
+# this should probably be a while loop
+def select_login(matches):
+    number_matches = len(matches)
+    while True: 
+        selection = input("Choose a login to to View/Modify/Delete.(Input a number from list)")
+        if not selection.isdigit():
+            print("Invalid selection made, format selection as number.")
+            continue
+        selection = int(selection)
+        if 1 <= selection <= number_matches:
+            return matches[selection-1]
+        else:
+            print("Invalid selection made. You're selection is not in the range of choices.")
 
+def login_options():
+    print("1. View")
+    print("2. Edit")
+    print("3. Modify")
+    while True:
+        select_option = input("Choose what to do with your login: ")
+        if not select_option.isdigit():
+            print("Invalid selection made, format selection as number.")
+            continue
+        select_option = int(select_option)
+        choices = [1, 2, 3]
+        if select_option in choices:
+            return select_option
+        else:
+            print("Invalid selection made. You're selection is not in the range of choices.")
+
+    
+
+# def view_login():
+#    selected_entry = select_login(matches)
+#       print(selected_entry)
 
 # def modify_login(): # build this out using display_search_criteria()
+
+# def delete_login(): # build this out using display_search_criteria()
 
 def generate_password():
     characters = (string.ascii_letters + string.digits + string.punctuation)
@@ -63,8 +93,6 @@ def generate_password():
     for i in range(pw_len):
         gen_pass += secrets.choice(characters)
     return gen_pass
-
-# def delete_login(): # build this out using display_search_criteria()
         
 def main():
     while True:
