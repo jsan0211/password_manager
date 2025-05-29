@@ -60,7 +60,7 @@ def select_login(matches):
         else:
             print("Invalid selection made. You're selection is not in the range of choices.")
 
-def login_options():
+def login_options(): # wont need this the user just needs function to view login, they make this selection in main menu
     print("1. View")
     print("2. Edit")
     print("3. Modify")
@@ -75,8 +75,6 @@ def login_options():
             return select_option
         else:
             print("Invalid selection made. You're selection is not in the range of choices.")
-
-    
 
 # def view_login():
 #    selected_entry = select_login(matches)
@@ -97,7 +95,7 @@ def generate_password():
 def main():
     while True:
         print("\nWhat would you like to do?")
-        print("1. Search for a login")
+        print("1. Search for a login") # change this to view login
         print("2. Create a new login")
         print("3. Modify an existing login")
         print("4. Delete a login")
